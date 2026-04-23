@@ -1,0 +1,21 @@
+{
+  "overview": "QTrack is a JEE study tracker with a color-coded question grid, per-level accuracy heatmap, and mistake-based revision suggestions — helping students track their progress and identify weak areas at a glance.",
+  "features": [
+    "Color-coded question grid (green/red/yellow/white per question)",
+    "Per-level accuracy heatmap with heat intensity colors",
+    "Top mistake tag ranking with actionable revision tips",
+    "Quick filters by status, mistake tag, and redo flag",
+    "Detail panel with notes, tags, difficulty rating, redo toggle",
+    "Progress bars for overall and per-level completion"
+  ],
+  "category": "productivity",
+  "tags": [
+    "study",
+    "jee",
+    "exam-prep",
+    "tracker",
+    "analytics",
+    "heatmap"
+  ],
+  "last_updated": "2026-04-23T15:54:28.027Z"
+}

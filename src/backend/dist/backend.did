@@ -1,0 +1,83 @@
+type Timestamp = int;
+type TemplateLevel = 
+ record {
+   endQuestion: QuestionNumber;
+   id: LevelId;
+   name: text;
+   order: nat;
+   startQuestion: QuestionNumber;
+   templateId: TemplateId;
+ };
+type TemplateId = nat;
+type Result_2 = 
+ variant {
+   err: text;
+   ok;
+ };
+type Result_1 = 
+ variant {
+   err: text;
+   ok: TemplateLevel;
+ };
+type Result = 
+ variant {
+   err: text;
+   ok: QuestionTemplate;
+ };
+type QuestionTemplate = 
+ record {
+   createdAt: Timestamp;
+   id: TemplateId;
+   name: text;
+   updatedAt: Timestamp;
+ };
+type QuestionStatus = 
+ variant {
+   Correct;
+   Incorrect;
+   Revisit;
+   Unattempted;
+ };
+type QuestionRecord = 
+ record {
+   difficultyRating: opt nat;
+   lastAttemptedAt: opt Timestamp;
+   markedForRedo: bool;
+   mistakeTags: vec MistakeTag;
+   notes: opt text;
+   questionNumber: QuestionNumber;
+   status: QuestionStatus;
+   templateId: TemplateId;
+ };
+type QuestionNumber = nat;
+type MistakeTag = 
+ variant {
+   AlgebraMistake;
+   ConceptError;
+   Guessed;
+   SillyMistake;
+   TimeIssue;
+ };
+type LevelId = nat;
+service : {
+  addLevel: (templateId: TemplateId, name: text, startQuestion: nat,
+   endQuestion: nat, order: nat) -> (Result_1);
+  createTemplate: (name: text) -> (QuestionTemplate);
+  deleteLevel: (id: LevelId) -> (Result_2);
+  deleteTemplate: (id: TemplateId) -> (Result_2);
+  getQuestionRecord: (templateId: TemplateId, questionNumber: nat) ->
+   (opt QuestionRecord) query;
+  getRedoMarkedQuestions: (templateId: TemplateId) ->
+   (vec QuestionRecord) query;
+  getTemplateLevels: (templateId: TemplateId) -> (vec TemplateLevel) query;
+  getTemplateRecords: (templateId: TemplateId) -> (vec QuestionRecord) query;
+  getTemplates: () -> (vec QuestionTemplate) query;
+  setQuestionStatus: (templateId: TemplateId, questionNumber: nat, status:
+   QuestionStatus) -> (QuestionRecord);
+  updateLevel: (id: LevelId, name: text, startQuestion: nat, endQuestion:
+   nat) -> (Result_1);
+  updateQuestionDetail: (templateId: TemplateId, questionNumber: nat, notes:
+   opt text, mistakeTags: vec MistakeTag, difficultyRating: opt nat,
+   markedForRedo: bool, lastAttemptedAt: opt Timestamp) -> (QuestionRecord);
+  updateTemplate: (id: TemplateId, name: text) -> (Result);
+}

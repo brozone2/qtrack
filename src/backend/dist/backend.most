@@ -1,0 +1,71 @@
+// Version: 1.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type LevelId__633306372 = LevelId__73141690;
+type LevelId__73141690 = Nat;
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type MistakeTag__269364511 =
+  {#AlgebraMistake; #ConceptError; #Guessed; #SillyMistake; #TimeIssue};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type QuestionNumber__421299308 = Nat;
+type QuestionNumber__425578260 = QuestionNumber__421299308;
+type QuestionRecord__877426965 =
+  {
+    difficultyRating : ?Nat;
+    lastAttemptedAt : ?Timestamp__519268012;
+    markedForRedo : Bool;
+    mistakeTags : [MistakeTag__269364511];
+    notes : ?Text;
+    questionNumber : QuestionNumber__425578260;
+    status : QuestionStatus__33434482;
+    templateId : TemplateId__267871842
+  };
+type QuestionStatus__33434482 =
+  {#Correct; #Incorrect; #Revisit; #Unattempted};
+type QuestionTemplate__981042976 =
+  {
+    createdAt : Timestamp__519268012;
+    id : TemplateId__267871842;
+    name : Text;
+    updatedAt : Timestamp__519268012
+  };
+type TemplateId__141868339 = Nat;
+type TemplateId__267871842 = TemplateId__141868339;
+type TemplateLevel__166905764 =
+  {
+    endQuestion : QuestionNumber__425578260;
+    id : LevelId__633306372;
+    name : Text;
+    order : Nat;
+    startQuestion : QuestionNumber__425578260;
+    templateId : TemplateId__267871842
+  };
+type Timestamp__301639476 = Int;
+type Timestamp__519268012 = Timestamp__301639476;
+type UserState__28743402 =
+  {
+    levels : Map__605269027<LevelId__633306372, TemplateLevel__166905764>;
+    var nextLevelId : Nat;
+    var nextTemplateId : Nat;
+    records :
+      Map__605269027<(TemplateId__267871842, QuestionNumber__425578260),
+                      QuestionRecord__877426965>;
+    templates :
+      Map__605269027<TemplateId__267871842, QuestionTemplate__981042976>
+  };
+actor {
+  stable state :
+    {
+      var root : Node__46230540<Principal, UserState__28743402>;
+      var size : Nat__490723111
+    }
+};
